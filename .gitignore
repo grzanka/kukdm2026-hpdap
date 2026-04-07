@@ -168,6 +168,16 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Workshop generated files
+*.h5
+*.hdf5
+*.png
+meteo_data/
+meteo/
+dask-worker-space/
+dask-scheduler-*.json
+*.log
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
