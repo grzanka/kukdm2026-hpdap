@@ -4,7 +4,7 @@ Training materials for the **KUKDM 2026** (Konferencja Użytkowników Komputeró
 
 **Duration**: 4 hours (2 × 2 h with a break)  
 **Platform**: Athena supercomputer (ACK Cyfronet AGH) via JupyterHub  
-**Paper**: [arXiv:2508.12451v1](https://arxiv.org/abs/2508.12451v1)
+**Paper**: [Fast silicon detectors as proton therapy beam monitors (arXiv:2508.12451)](https://arxiv.org/abs/2508.12451)
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ Training materials for the **KUKDM 2026** (Konferencja Użytkowników Komputeró
 1. Log into JupyterHub on Athena.
 2. Clone this repository:
    ```bash
-   git clone https://github.com/<org>/kukdm2026-hpdap.git
+   git clone https://github.com/grzanka/kukdm2026-hpdap.git
    cd kukdm2026-hpdap
    ```
 3. Install dependencies:
@@ -51,12 +51,32 @@ Replace `<port>` with your assigned dashboard port (see `00_setup.ipynb`).
 
 ## Data
 
+### Scientific datasets (Parquet)
+
+The scientific data originates from the paper above — LGAD silicon detector measurements
+in a proton therapy beam. Two processing levels:
+
+- **lv1** (raw waveforms): high-frequency voltage samples with nanosecond timestamps
+- **lv2** (extracted features): peak amplitude, rise time, pulse length, polarity
+
 | Dataset | Path on Athena | Format |
 |---------|---------------|--------|
-| Scientific lv1 | `/net/pr2/projects/tutorial/2025-09-25-hpda/dataset/lv1/` | Parquet |
-| Scientific lv2 | `/net/pr2/projects/tutorial/2025-09-25-hpda/dataset/lv2/` | Parquet |
-| Weather (backup) | `/net/pr2/projects/tutorial/2025-09-25-hpda/meteo/` | CSV/HDF5 |
-| Weather (source) | `https://meteo.gig.eu/archiwum/2025/` | TXT |
+| Scientific lv1 | `/net/pr2/projects/tutorial/2026-04-15-hpda/dataset/lv1/` | Parquet |
+| Scientific lv2 | `/net/pr2/projects/tutorial/2026-04-15-hpda/dataset/lv2/` | Parquet |
+
+### Weather data
+
+Meteorological station data from [GIG Katowice](https://meteo.gig.eu/),
+licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+| Dataset | Location | Format |
+|---------|----------|--------|
+| Weather (source) | <https://meteo.gig.eu/archiwum/2025/> | TXT (weekly files, whitespace-separated) |
+| Weather (backup on Athena) | `/net/pr2/projects/tutorial/2026-04-15-hpda/meteo/` | TXT / HDF5 |
+| Weather (in repo) | [`meteo/`](meteo/) | TXT / HDF5 |
+
+The weather files are included in this repository for offline use.
+The original data is updated weekly at the source URL.
 
 ### Instructor: Pre-stage weather data
 
@@ -65,8 +85,8 @@ participants do not all download simultaneously:
 
 ```bash
 # Run on Athena as the tutorial user
-mkdir -p /net/pr2/projects/tutorial/2025-09-25-hpda/meteo
-cd /net/pr2/projects/tutorial/2025-09-25-hpda/meteo
+mkdir -p /net/pr2/projects/tutorial/2026-04-15-hpda/meteo
+cd /net/pr2/projects/tutorial/2026-04-15-hpda/meteo
 for m in 01 02 03; do
   for d in $(seq -w 1 31); do
     wget -q "https://meteo.gig.eu/archiwum/2025/${m}/${d}.txt" 2>/dev/null || true
@@ -76,4 +96,5 @@ done
 
 ## License
 
-See [LICENSE](LICENSE).
+Code: [GPL-3.0](LICENSE)  
+Weather data: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (source: [meteo.gig.eu](https://meteo.gig.eu/))
