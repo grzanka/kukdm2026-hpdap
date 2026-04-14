@@ -1,0 +1,13 @@
+requests
+matplotlib
+numpy
+pandas
+pyarrow
+tables
+dask[array]
+dask[dataframe]
+dask[diagnostics]
+dask[distributed]
+dask-jobqueue
+graphviz
+psutil
