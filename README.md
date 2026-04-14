@@ -77,22 +77,7 @@ licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 The weather files are included in this repository for offline use.
 The original data is updated weekly at the source URL.
-
-### Instructor: Pre-stage weather data
-
-Before the workshop, download the weather data once to the shared path so that
-participants do not all download simultaneously:
-
-```bash
-# Run on Athena as the tutorial user
-mkdir -p /net/pr2/projects/tutorial/2026-04-15-hpda/meteo
-cd /net/pr2/projects/tutorial/2026-04-15-hpda/meteo
-for m in 01 02 03; do
-  for d in $(seq -w 1 31); do
-    wget -q "https://meteo.gig.eu/archiwum/2025/${m}/${d}.txt" 2>/dev/null || true
-  done
-done
-```
+Notebook `02_pandas_and_dask_intro.ipynb` downloads any missing files automatically.
 
 ## License
 
